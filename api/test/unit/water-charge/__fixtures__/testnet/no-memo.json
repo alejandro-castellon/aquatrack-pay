@@ -1,0 +1,40 @@
+{
+  "description": "no-memo",
+  "target": {
+    "destination": "GCV2O6LDJUNPSRBWMUHIPJOSRETVTVEYSAZLU5YKJU24EXFZXZAA63MD",
+    "assetCode": "TESTUSD",
+    "assetIssuer": "GBHJPTVKJ2E6M4TRRPMNJMJ6IZLTRS3AGDOPIVL6Y3CLVZ33BMBQEH6P"
+  },
+  "charge": {
+    "memo": "AQT-FNB3AQ9BBH",
+    "dueStroops": "131000000"
+  },
+  "expected": "wrong_memo",
+  "lookedUpBy": "839601acbcaccb0f720f8486967bece506acc650c8a7d1f67d4bf8454e37520e",
+  "operations": [
+    {
+      "id": "24934853543739393",
+      "paging_token": "24934853543739393",
+      "type": "payment",
+      "transaction_hash": "839601acbcaccb0f720f8486967bece506acc650c8a7d1f67d4bf8454e37520e",
+      "transaction_successful": true,
+      "source_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+      "created_at": "2026-11-19T01:27:10Z",
+      "from": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+      "to": "GCV2O6LDJUNPSRBWMUHIPJOSRETVTVEYSAZLU5YKJU24EXFZXZAA63MD",
+      "amount": "13.1000000",
+      "asset_type": "credit_alphanum12",
+      "asset_code": "TESTUSD",
+      "asset_issuer": "GBHJPTVKJ2E6M4TRRPMNJMJ6IZLTRS3AGDOPIVL6Y3CLVZ33BMBQEH6P",
+      "transaction": {
+        "hash": "839601acbcaccb0f720f8486967bece506acc650c8a7d1f67d4bf8454e37520e",
+        "ledger": 5805598,
+        "created_at": "2026-11-19T01:27:10Z",
+        "successful": true,
+        "source_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+        "fee_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+        "memo_type": "none"
+      }
+    }
+  ]
+}

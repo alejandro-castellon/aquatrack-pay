@@ -1,0 +1,11 @@
+{
+  "name": "aquatrack-pay-web",
+  "private": true,
+  "description": "Pantallas de AquaTrack Pay: lo que corre sin la plataforma (pruebas de las utilidades de pago).",
+  "scripts": {
+    "test:payments": "tsc -p tests/tsconfig.payments.json && node --test tests/payments.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

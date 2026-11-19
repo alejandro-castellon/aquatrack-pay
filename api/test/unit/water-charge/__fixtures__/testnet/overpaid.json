@@ -1,0 +1,41 @@
+{
+  "description": "overpaid",
+  "target": {
+    "destination": "GCV2O6LDJUNPSRBWMUHIPJOSRETVTVEYSAZLU5YKJU24EXFZXZAA63MD",
+    "assetCode": "TESTUSD",
+    "assetIssuer": "GBHJPTVKJ2E6M4TRRPMNJMJ6IZLTRS3AGDOPIVL6Y3CLVZ33BMBQEH6P"
+  },
+  "charge": {
+    "memo": "AQT-V5MDA9Q200",
+    "dueStroops": "131000000"
+  },
+  "expected": "settles",
+  "lookedUpBy": "2bce2f864518e3a9f17460efd50b7dad69bc4a6f77ff89f8fca9126447e94b32",
+  "operations": [
+    {
+      "id": "24934862133678081",
+      "paging_token": "24934862133678081",
+      "type": "payment",
+      "transaction_hash": "2bce2f864518e3a9f17460efd50b7dad69bc4a6f77ff89f8fca9126447e94b32",
+      "transaction_successful": true,
+      "source_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+      "created_at": "2026-11-19T01:27:20Z",
+      "from": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+      "to": "GCV2O6LDJUNPSRBWMUHIPJOSRETVTVEYSAZLU5YKJU24EXFZXZAA63MD",
+      "amount": "18.1000000",
+      "asset_type": "credit_alphanum12",
+      "asset_code": "TESTUSD",
+      "asset_issuer": "GBHJPTVKJ2E6M4TRRPMNJMJ6IZLTRS3AGDOPIVL6Y3CLVZ33BMBQEH6P",
+      "transaction": {
+        "hash": "2bce2f864518e3a9f17460efd50b7dad69bc4a6f77ff89f8fca9126447e94b32",
+        "ledger": 5805600,
+        "created_at": "2026-11-19T01:27:20Z",
+        "successful": true,
+        "source_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+        "fee_account": "GC3MRR6PQEPYTQ2NPNK62FHNXMNCSPQQIEQVID5T43J6UOYGPGVB3WZ4",
+        "memo_type": "text",
+        "memo": "AQT-V5MDA9Q200"
+      }
+    }
+  ]
+}

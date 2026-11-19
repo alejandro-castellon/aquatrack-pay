@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "rootDir": "../src/lib",
+    "outDir": "../.cache/payments-tests",
+    "noEmit": false,
+    "incremental": false,
+    "plugins": []
+  },
+  "include": ["../src/lib/utils/stellar-pay.ts"],
+  "exclude": ["../node_modules"]
+}

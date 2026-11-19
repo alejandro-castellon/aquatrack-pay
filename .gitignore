@@ -1,0 +1,12 @@
+node_modules/
+.cache/
+dist/
+coverage/
+
+# Configuración local
+.env
+.env.*
+!.env.example
+
+# Llaves de testnet que crean los scripts de la demo
+api/scripts/demo/.demo-keys.json

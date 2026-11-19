@@ -1,0 +1,30 @@
+{
+  "name": "aquatrack-pay-api",
+  "private": true,
+  "description": "Módulo de cobros de AquaTrack Pay: lo que corre sin la plataforma (pruebas de dominio y scripts de testnet).",
+  "scripts": {
+    "test": "jest",
+    "demo:smoke": "ts-node -r tsconfig-paths/register scripts/demo/smoke-testnet.ts",
+    "demo:pay": "ts-node -r tsconfig-paths/register scripts/demo/pay-charge.ts"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
+    "@stellar/stellar-sdk": "17.4.0",
+    "dotenv": "^17.4.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.7",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3"
+  }
+}

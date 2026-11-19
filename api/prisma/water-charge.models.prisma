@@ -1,0 +1,76 @@
+// Extracto del schema de Prisma de la plataforma: solo lo que añade este módulo.
+// Faltan, a propósito, los demás modelos y las relaciones inversas que estos
+// dos modelos tienen en Building, Apartment, ApartmentMonthlyConsumption y User.
+// La migración completa está en prisma/migrations/.
+
+enum WaterChargeStatus {
+  pending
+  paid
+  cancelled
+
+  @@map("water_charge_status")
+}
+
+model BuildingTreasury {
+  id          String   @id @default(uuid()) @db.Uuid
+  buildingId  String   @unique @db.Uuid
+  /// "testnet" or "public".
+  network     String
+  /// Stellar account id (G...).
+  publicKey   String   @unique
+  assetCode   String
+  assetIssuer String
+  /// Snapshot of the signers at setup: [{ publicKey, label }]. The chain is the source of truth.
+  signers     Json
+  /// Signatures needed to move funds.
+  threshold   Int
+  setupTxHash String
+  /// Horizon paging token of the last incoming payment the watcher processed.
+  lastCursor  String?
+  createdById String?  @db.Uuid
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  building Building      @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+  charges  WaterCharge[]
+
+  @@map("building_treasuries")
+}
+
+model WaterCharge {
+  id                            String            @id @default(uuid()) @db.Uuid
+  apartmentMonthlyConsumptionId String            @unique @db.Uuid
+  apartmentId                   String            @db.Uuid
+  buildingId                    String            @db.Uuid
+  treasuryId                    String            @db.Uuid
+  month                         String
+  amountBs                      Decimal           @db.Decimal(10, 2)
+  /// Bs per 1 USDC, fixed when the charge was published.
+  exchangeRate                  Decimal           @db.Decimal(10, 4)
+  amountUsdc                    Decimal           @db.Decimal(18, 7)
+  /// Text memo the payment must carry. It becomes public on-chain.
+  memo                          String            @unique
+  /// Unguessable code of the public pay link. Never the memo.
+  publicCode                    String            @unique
+  status                        WaterChargeStatus @default(pending)
+  txHash                        String?           @unique
+  payerAddress                  String?
+  paidAmountUsdc                Decimal?          @db.Decimal(18, 7)
+  ledger                        Int?
+  paidAt                        DateTime?
+  /// Demo faucet sends to payers of this charge (testnet only).
+  faucetDrips                   Int               @default(0)
+  createdById                   String?           @db.Uuid
+  createdAt                     DateTime          @default(now())
+  updatedAt                     DateTime          @updatedAt
+
+  apartmentMonthlyConsumption ApartmentMonthlyConsumption @relation(fields: [apartmentMonthlyConsumptionId], references: [id], onDelete: Cascade)
+  apartment                   Apartment                   @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+  building                    Building                    @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+  treasury                    BuildingTreasury            @relation(fields: [treasuryId], references: [id], onDelete: Cascade)
+
+  @@index([buildingId, month])
+  @@index([apartmentId])
+  @@index([treasuryId, status])
+  @@map("water_charges")
+}
