@@ -2,9 +2,9 @@
 
 El recibo de agua de cada departamento se paga, se concilia solo y llega a una caja que solo mueve la directiva del edificio. Construido sobre Stellar durante la National Startups Hackathon by Stellar (noviembre de 2026).
 
-> **Borrador del 19 de noviembre.** Lo marcado como *pendiente* todavía no está hecho o no está verificado. Este repositorio contiene el módulo construido en la hackathon; la plataforma de AquaTrack en la que se integra es privada.
+> **Versión del 22 de noviembre.** Lo marcado como *pendiente* todavía no está hecho o no está verificado. Este repositorio contiene el módulo construido en la hackathon; la plataforma de AquaTrack en la que se integra es privada.
 
-**In English.** AquaTrack meters water per apartment in Bolivian buildings and splits the building's single utility bill by measured consumption. AquaTrack Pay, built during this hackathon, turns each apartment's share into a charge that is paid in USDC on Stellar with a reference memo, reconciled automatically by reading the ledger, and received in a building treasury that needs two of three board signatures to move. AquaTrack never holds the money. Everything here runs on testnet.
+**In English.** AquaTrack meters water per apartment in Bolivian buildings and splits the building's single utility bill by measured consumption. AquaTrack Pay, built during this hackathon, turns each apartment's share into a charge that is paid in USDC on Stellar with a reference memo, reconciled automatically by reading the ledger, and received in a building treasury that needs two of three board signatures to move. AquaTrack never holds the money. Everything here runs on testnet, and there is a [live demo](https://demo.aquatrack.net/demo) with example data. Residents cannot pay in bolivianos yet: the candidate route, a bank-QR on-ramp, is part of the 30-day plan.
 
 ## 1. Problema y usuario
 
@@ -18,7 +18,7 @@ En muchos edificios de Bolivia llega una sola factura de agua para todo el edifi
 
 ## 2. Producto funcionando
 
-**Demo.** *Pendiente:* URL pública con una guía de tres pasos (`/demo`).
+**Demo.** [demo.aquatrack.net/demo](https://demo.aquatrack.net/demo): una guía de tres pasos para pagar un recibo de ejemplo y verlo conciliado. Es una instancia aparte de la plataforma en producción, con su propia base de datos de ejemplo y en testnet.
 
 Qué se puede hacer:
 
@@ -27,7 +27,7 @@ Qué se puede hacer:
 3. La API lee la transacción en la red y marca el recibo como pagado. Nadie revisa comprobantes.
 4. El administrador ve quién pagó y la caja del edificio: saldo, firmantes y pagos recibidos, todo leído de Stellar.
 
-Estado al 19 de noviembre:
+Estado al 22 de noviembre:
 
 | Pieza | Estado |
 |---|---|
@@ -36,7 +36,7 @@ Estado al 19 de noviembre:
 | Página de pago, panel de cobros y pantalla de la caja | Hecho y verificado en navegador contra la API |
 | Pago desde cualquier billetera de Stellar | Hecho y verificado: la página pasa sola a "Pago recibido" |
 | Pago con billetera Pollar, entrando con correo o con Google | Hecho y verificado en local con pagos reales en testnet |
-| Demo desplegada | *Pendiente* |
+| Demo desplegada | Hecho: base, API y web propias. Un [pago de prueba](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7) hecho desde otra billetera quedó conciliado por el servidor en 10 segundos |
 
 ## 3. Uso de Stellar
 
@@ -64,6 +64,17 @@ Todo lo anterior se reproduce desde este repositorio con `pnpm demo:smoke` (ver 
 | 1. Ciclo completo de cobro con un edificio real, en testnet (días 1 a 10) | Montos del prorrateo medido o cargados por el administrador; conciliación de pagos de menos, de más, sin referencia y duplicados | Un edificio real con 10 cobros emitidos, 5 pagados por vecinos o directiva, ninguna corrección manual, mediana de 60 s entre abrir el recibo y el pago confirmado |
 | 2. Caja con retiros y libro público (días 8 a 20) | Proponer, firmar entre dos y enviar un retiro desde la plataforma; cambio de firmantes; página de totales sin nombres | Tres personas distintas como firmantes, un retiro con dos firmas, un intento con una firma rechazado, un cambio de firmante, totales iguales al ledger |
 | 3. Primer cobro con dinero real, con tope (días 18 a 30) | Configuración de mainnet con límites; una ruta de bolivianos a la caja y de vuelta, probada y medida | 5 pagos reales de 3 pagadores, un retiro con dos firmas, tope de USD 100, opinión legal entregada antes del primer pago. Si la opinión dice esperar, se entrega el despliegue y la consulta presentada |
+
+**De dónde sale la plata del vecino.** En la demo, de un grifo de USDC de prueba. Con dinero real el vecino no debería tener que conseguir dólares digitales, y eso es lo que resuelve el tercer entregable. La ruta que probaremos primero es la rampa de Pollar: el vecino entra con su correo, paga un QR bancario desde la app de su banco y recibe USDC en su billetera; desde ahí paga el recibo con su referencia, igual que hoy. La documentación de Pollar lista un [proveedor para bolivianos](https://docs.pollar.xyz/docs/operator-guide/ramps/providers), Stereum, con compra por QR bancario y venta a una cuenta bancaria, y pone como [ejemplo de ruta](https://docs.pollar.xyz/docs/operator-guide/ramps/routes) una que va de bolivianos a USDC sobre Stellar.
+
+Lo que falta confirmar antes de prometerla:
+
+- Que esa ruta esté disponible para nuestra aplicación hasta Stellar. El proveedor liquida en Polygon y el ejemplo añade un cambio a USDC y un puente.
+- Que se pueda probar sin dinero real.
+- Su costo de punta a punta y sus límites, de ida y de vuelta. La vuelta importa: la factura de agua del edificio se paga en bolivianos.
+- Qué verificación de identidad le pide al vecino.
+
+Mientras tanto, quien ya tenga USDC en Stellar puede pagar desde su billetera con destino, monto y memo.
 
 Después: postular al Integration Track de SCF Build, con el USDC cobrado en las cajas como métrica.
 
@@ -111,7 +122,7 @@ pnpm test:payments  # 14 pruebas de las utilidades de pago
 ## Límites que conocemos
 
 - Todo corre en testnet. No hay dinero real ni lo habrá antes de una opinión legal.
-- La entrada y salida en bolivianos no está resuelta: es el tercer entregable.
+- La entrada y salida en bolivianos no está resuelta: es el tercer entregable, y su ruta candidata está sin confirmar (ver el [plan de 30 días](#4-plan-de-30-días)).
 - Un pago parcial no liquida el cobro; se muestra como monto incompleto.
 - En la demo, las llaves de la directiva del edificio de ejemplo son de prueba y las guarda el equipo.
 - Si alguien no paga, aquí no se corta el agua: el acceso al agua es un derecho y la válvula no se usa para eso.

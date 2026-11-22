@@ -73,6 +73,16 @@ function wasCancelled(code?: string, message?: string): boolean {
   return /cancel|reject|declin|denied|dismiss/i.test(`${code} ${message}`);
 }
 
+/**
+ * "nombre@correo.com" pasa a "no•••@correo.com": alcanza para reconocer la
+ * cuenta sin dejar el correo entero en pantalla (la página se comparte y se graba).
+ */
+function maskEmail(email: string): string {
+  const at = email.lastIndexOf("@");
+  if (at <= 0) return email;
+  return `${email.slice(0, Math.min(2, at))}•••${email.slice(at)}`;
+}
+
 function describeError(error: unknown, fallback: string): string {
   return error instanceof Error && error.message ? error.message : fallback;
 }
@@ -398,7 +408,7 @@ function PollarPayFlow({ code, charge, onCharge }: PollarPayProps) {
             <>
               Entraste como{" "}
               <span className="font-medium break-all text-slate-900">
-                {accountEmail}
+                {maskEmail(accountEmail)}
               </span>
             </>
           ) : (

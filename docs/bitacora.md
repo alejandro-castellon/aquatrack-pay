@@ -66,3 +66,26 @@ En números: 9 pruebas unitarias nuevas en la API, 8 en el módulo de cobros (31
 Aprendido:
 
 - Pollar solo responde desde los orígenes registrados en su panel, y los comprueba por app: una clave válida desde un origen sin registrar recibe un 403, no un error de clave. El acceso con Google pide además una dirección de retorno registrada; el acceso con código por correo, no.
+
+## Viernes 20 de noviembre
+
+Hecho:
+
+- Revisamos de dónde saldría la plata del vecino con dinero real y lo escribimos en el README: la ruta candidata es la rampa de Pollar con QR bancario, y la lista de lo que falta confirmar antes de prometerla.
+
+## Domingo 22 de noviembre
+
+Hecho y verificado:
+
+- Ensayo del despliegue en local con Docker y los mismos `Dockerfile` del servidor: las dos imágenes se construyen, la API aplica sus 37 migraciones sobre una base nueva, la base de ejemplo se siembra dentro del contenedor y las cajas se crean en testnet desde esa imagen.
+- Demo desplegada en [demo.aquatrack.net/demo](https://demo.aquatrack.net/demo): una instancia aparte de la plataforma en producción, con su propia base de datos de ejemplo, su propia API y su propia web, sin conexión a medidores.
+- En la demo desplegada: cajas de 2 de 3 firmas para tres edificios de ejemplo y 31 cobros publicados. Un [pago hecho desde otra billetera](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7), sin avisarle a la API, quedó conciliado por el servidor 10 segundos después y sus 4,67 USDC están en la [caja del edificio de ejemplo](https://stellar.expert/explorer/testnet/account/GDKANI42SKX3E3ESDVV4OXZRMHHQE7REEKVBLRO2EDKVUNTOOPBVBTWF).
+
+Encontrado al desplegar, y corregido:
+
+- La terminal del contenedor abre en otra carpeta y la siembra no encontraba su archivo. De paso, el comando de siembra ahora cuenta usuarios, edificios y lecturas y solo corre si la base está vacía, porque el nombre de la base no alcanza para saber cuál es.
+
+Pendiente:
+
+- Pago con billetera Pollar desde la demo desplegada. Pollar ya acepta ese origen; los pagos con Pollar verificados hasta hoy son los de la demo local.
+- Las entrevistas con administradores.
