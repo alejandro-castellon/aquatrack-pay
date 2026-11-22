@@ -12,7 +12,7 @@ En muchos edificios de Bolivia llega una sola factura de agua para todo el edifi
 
 **Usuario.** El administrador que cobra el agua de un edificio y la directiva que responde por esa plata ante los copropietarios.
 
-**Evidencia.** *Pendiente:* entrevistas con administradores entre el 18 y el 20 de noviembre (cómo cobran hoy, cuánto tardan en cuadrar pagos, en qué cuenta entra la plata). Se publican aquí con el tamaño de la muestra, incluidas las respuestas que nos contradigan.
+**Evidencia.** Durante la hackathon conversamos con administradores de edificios. *Pendiente:* publicar aquí el resumen de esas conversaciones (cuántos fueron, cómo cobran hoy, cuánto tardan en cuadrar pagos, en qué cuenta entra la plata), con el tamaño de la muestra e incluidas las respuestas que nos contradigan.
 
 **Lo que no afirmamos.** No decimos que los vecinos prefieran pagar en dólares digitales ni que esto sea más barato que el QR del banco, que es gratis y funciona. El recibo sigue en bolivianos. Lo que el QR no da es lo que pasa después del pago: referencia, conciliación y control compartido de la caja.
 
@@ -38,6 +38,8 @@ Estado al 22 de noviembre:
 | Pago con billetera Pollar, entrando con correo o con Google | Hecho y verificado con pagos reales en testnet, en local y en la demo desplegada |
 | Demo desplegada | Hecho: base, API y web propias. Un [pago de prueba](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7) hecho desde otra billetera quedó conciliado por el servidor en 10 segundos, y un [pago con billetera Pollar](https://stellar.expert/explorer/testnet/tx/b64f1ed14067f1cd8fa2b774e191420e943e8827f02b364c3dcdd4348ec81525) llegó a la caja con el memo de su recibo y la comisión patrocinada |
 
+**Pruebas.** El módulo tiene 325 pruebas automáticas: 311 en la API y 14 en la web. Desde este repositorio corren 138 (124 y 14); las otras 187 dependen de la plataforma. Aparte hay 8 pruebas de extremo a extremo de cobros, con base de datos.
+
 ## 3. Uso de Stellar
 
 Stellar no hace falta para medir agua. Para este módulo sí: sin la red, el producto vuelve a ser un recibo que dice cuánto se debe.
@@ -50,6 +52,8 @@ Stellar no hace falta para medir agua. Para este módulo sí: sin la red, el pro
 | Una sola persona no puede retirar | Multifirma nativa: con una firma la red responde `tx_bad_auth` | [Retiro con dos firmas](https://stellar.expert/explorer/testnet/tx/d789f3747428b2eb7507f7f57b71d4b281bb03fca7ad7517ca143d7370e46a49) |
 | El vecino no paga comisión de red | Transacción con comisión patrocinada (fee bump) | [Pago patrocinado](https://stellar.expert/explorer/testnet/tx/7250bf7b4d589389a1dfd2dcfa3d8f85a1824384adb86fbcc13156c2fd96697b) |
 | El vecino entra con su correo y no tiene que conseguir XLM | Billetera embebida de [Pollar](https://pollar.xyz): reserva, línea de confianza de USDC y comisión patrocinadas | [Pago de un recibo desde la página de pago](https://stellar.expert/explorer/testnet/tx/bdaacbf5c89f189e20ed1b03512e4a4483aa088dca22b29a51b370c4b5aade1b), con su memo y la comisión a cargo de Pollar |
+
+Qué es cada cuenta de testnet que aparece en esta entrega, y todas las transacciones con su fecha en la red, están en [docs/evidencia.md](docs/evidencia.md).
 
 La caja se crea en una sola transacción: cuenta, línea de confianza del activo, firmantes, umbrales y llave maestra desactivada. La llave temporal se descarta, así que ni el servidor puede firmar por ella.
 
@@ -82,6 +86,10 @@ Después: postular al Integration Track de SCF Build, con el USDC cobrado en las
 
 AquaTrack es una startup de Cochabamba: 21 medidores vendidos a cinco clientes en Cochabamba, Sacaba, Santa Cruz y Sucre. El primer edificio con un medidor por departamento (10 departamentos, en Sacaba) está vendido y pendiente de instalación.
 
+**Equipo.** Alejandro Castellón, Founder & CEO, construyó este módulo. Rodrigo Altamirano está a cargo del hardware y la manufactura de los medidores.
+
+**Reconocimientos, con su fuente.** [Ganadores del Track Corporativo de MCPJam en COCHATECH 2026](https://cba.ucb.edu.bo/estudiantes-de-mecatronica-y-sistemas-ganan-premio-de-1000-usd-en-el-track-corporativo/), con un premio de USD 1.000. [Puesto 51 de los 500 Mejores Proyectos de Premios Verdes 2026](https://500-mejores.premiosverdes.org/es/proyecto-500-mejores?proyecto=aquatrack-alejandro-mauricio-castellon-fernandez).
+
 | Antes de la hackathon | Construido en la hackathon |
 |---|---|
 | Medidor, central y plataforma en producción | Cobros publicados desde el prorrateo |
@@ -90,7 +98,7 @@ AquaTrack es una startup de Cochabamba: 21 medidores vendidos a cinco clientes e
 | Recibo en PDF por departamento | Caja multifirma del edificio |
 | Ninguna forma de cobrar ni estado de pago | Estado de pago, comprobante en la red y QR de pago en el recibo |
 
-El avance día por día está en [docs/bitacora.md](docs/bitacora.md).
+El avance día por día está en [docs/bitacora.md](docs/bitacora.md), y la evidencia con fecha (transacciones, cuentas, commits y pruebas) en [docs/evidencia.md](docs/evidencia.md).
 
 ## Qué hay en este repositorio
 
