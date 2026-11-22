@@ -79,7 +79,10 @@ Hecho y verificado:
 
 - Ensayo del despliegue en local con Docker y los mismos `Dockerfile` del servidor: las dos imágenes se construyen, la API aplica sus 37 migraciones sobre una base nueva, la base de ejemplo se siembra dentro del contenedor y las cajas se crean en testnet desde esa imagen.
 - Demo desplegada en [demo.aquatrack.net/demo](https://demo.aquatrack.net/demo): una instancia aparte de la plataforma en producción, con su propia base de datos de ejemplo, su propia API y su propia web, sin conexión a medidores.
-- En la demo desplegada: cajas de 2 de 3 firmas para tres edificios de ejemplo y 31 cobros publicados. Un [pago hecho desde otra billetera](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7), sin avisarle a la API, quedó conciliado por el servidor 10 segundos después y sus 4,67 USDC están en la [caja del edificio de ejemplo](https://stellar.expert/explorer/testnet/account/GDKANI42SKX3E3ESDVV4OXZRMHHQE7REEKVBLRO2EDKVUNTOOPBVBTWF).
+- En la demo desplegada: cajas de 2 de 3 firmas para tres edificios de ejemplo y 31 cobros publicados. Un [pago hecho desde otra billetera](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7), sin avisarle a la API, quedó conciliado por el servidor 10 segundos después y sus 4,67 USDC llegaron a la [caja del edificio de ejemplo](https://stellar.expert/explorer/testnet/account/GDKANI42SKX3E3ESDVV4OXZRMHHQE7REEKVBLRO2EDKVUNTOOPBVBTWF).
+
+- Pago con billetera Pollar desde la demo desplegada: los [10,59 USDC del recibo 2B de octubre](https://stellar.expert/explorer/testnet/tx/b64f1ed14067f1cd8fa2b774e191420e943e8827f02b364c3dcdd4348ec81525) llegaron a la caja con el memo del recibo y la comisión de red pagada por Pollar, y el recibo quedó pagado.
+- Retiro de esa caja en la demo desplegada: con una sola firma la red lo rechazó (`tx_bad_auth`) y [con dos firmas pasó](https://stellar.expert/explorer/testnet/tx/15bcbe3a512a3f54b4e6f372dac4538e307e2ce82bdb23366c178c5d2e255d6d). Los 15,26 USDC volvieron a la cuenta del grifo de la demo, para que los próximos visitantes puedan pagar.
 
 Encontrado al desplegar, y corregido:
 
@@ -87,5 +90,4 @@ Encontrado al desplegar, y corregido:
 
 Pendiente:
 
-- Pago con billetera Pollar desde la demo desplegada. Pollar ya acepta ese origen; los pagos con Pollar verificados hasta hoy son los de la demo local.
 - Las entrevistas con administradores.

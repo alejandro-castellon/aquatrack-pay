@@ -35,8 +35,8 @@ Estado al 22 de noviembre:
 | API de cobros y caja | Hecho y verificado con base de datos y pagos reales en testnet, en USDC de prueba de Circle |
 | Página de pago, panel de cobros y pantalla de la caja | Hecho y verificado en navegador contra la API |
 | Pago desde cualquier billetera de Stellar | Hecho y verificado: la página pasa sola a "Pago recibido" |
-| Pago con billetera Pollar, entrando con correo o con Google | Hecho y verificado en local con pagos reales en testnet |
-| Demo desplegada | Hecho: base, API y web propias. Un [pago de prueba](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7) hecho desde otra billetera quedó conciliado por el servidor en 10 segundos |
+| Pago con billetera Pollar, entrando con correo o con Google | Hecho y verificado con pagos reales en testnet, en local y en la demo desplegada |
+| Demo desplegada | Hecho: base, API y web propias. Un [pago de prueba](https://stellar.expert/explorer/testnet/tx/aeab86d80d84fd97f440330102d1a9c0b23581edf1aa8b59b378b75d8ce6a5b7) hecho desde otra billetera quedó conciliado por el servidor en 10 segundos, y un [pago con billetera Pollar](https://stellar.expert/explorer/testnet/tx/b64f1ed14067f1cd8fa2b774e191420e943e8827f02b364c3dcdd4348ec81525) llegó a la caja con el memo de su recibo y la comisión patrocinada |
 
 ## 3. Uso de Stellar
 
